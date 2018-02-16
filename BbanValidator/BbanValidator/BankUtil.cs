@@ -7,13 +7,19 @@ namespace BbanValidator
     class BankUtil
     {
         /// <summary>
-        /// Changes account number to machine readable format
+        /// Changes BBAN account  to machine readable format
         /// </summary>
         /// <param name="accountNum"></param>
         /// <returns>machineformat account</returns>
-        public static string IsValid(string accountNum)
+        public static bool Correctnumber(ref string accountNum)
         {
             accountNum = accountNum.Replace("-","").Replace(" ","");
+            for(int i = 0; i < accountNum.Length; i++)
+            {
+                bool isDigit = int.TryParse(accountNum[i].ToString(), out int digit);
+                    if (!isDigit)
+                    return false;
+            }
 
             int positionOfZeros = 0;
             if (accountNum[0] == '1' || accountNum[0] == '2' ||
@@ -25,26 +31,22 @@ namespace BbanValidator
             {
                 if (accountNum[1] == '0' || accountNum[1] == '2' ||
                     accountNum[1] == '5')
-                    return "Account in incorrect format!";
+                    return false;
                 positionOfZeros = 6;
             }
             else if (accountNum[0] == '4' || accountNum[0] == '5')
                 positionOfZeros = 7;
             else
             {
-                return "Account is not valid!";
+                return false;
             }
+           
 
-            //for(int i = accountNum.Length; i < 14; i++)
-            //{
-            //     accountNum = accountNum.Insert(positionOfZeros, "0");
-            //}
-
-            while(accountNum.Length < 14)
+            for (int i = accountNum.Length; i < 14; i++)
             {
                 accountNum = accountNum.Insert(positionOfZeros, "0");
             }
-            return accountNum;
+            return true;
         }
         //Method that checks which bank
 
