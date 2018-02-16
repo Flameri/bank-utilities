@@ -8,10 +8,10 @@ namespace BbanValidator
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             string machineFormat = "227720-35988";
-            bool isMachineFormat = BankUtil.Correctnumber(ref machineFormat);
+            bool isMachineFormat = UtilityBBAN.Correctnumber(ref machineFormat);
             if (isMachineFormat)
             {
-                Console.WriteLine($"{machineFormat} - {BankUtil.IsValidAccount(machineFormat)}");
+                Console.WriteLine($"{machineFormat} - {UtilityBBAN.IsValidAccount(machineFormat)}");
             }
             else
             {

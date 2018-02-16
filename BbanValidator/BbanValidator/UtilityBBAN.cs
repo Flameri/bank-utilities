@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BbanValidator
 {
-    class BankUtil
+    class UtilityBBAN
     {
         /// <summary>
         /// Changes BBAN account  to machine readable format
